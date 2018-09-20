@@ -124,11 +124,13 @@ public class TestWord {
 		int indexSpace = personinfo.indexOf(' ');	//名字中的字数不确定
 		p[i].name = personinfo.substring(0, indexSpace);
 	}
-	public static int getFamilyRank(int i, String personinfo) {
+	public static void getFatherName(int i, String personinfo) {
 		int indexStart = personinfo.indexOf(' ');
 		int indexEnd = personinfo.indexOf("子 ");
 		String fartherAndRank = personinfo.substring(indexStart, indexEnd);
 		
-		return 1;
+	}
+	public static void getFamilyRank(int i, String fartherAndRank) {
+		
 	}
 }
