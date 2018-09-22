@@ -4,14 +4,17 @@ public class People {
 	int id;	
 	String name;
 	int fatherid;
-	String partnerid;
+	int motherid;
+	String partnerid="";
 	String CourtesyName;
 	String pesudonym;
+	String gender="ÄÐ";
 	String ChineseBirthday;
 	String Chinesedeathdate;
 	String buried; 
-	int rank;
+	int familyrank;
 	int generition;
+	String family="Îâ";
 	String description;
 	String fathername="";
 	String daughterinfo="";
@@ -22,13 +25,13 @@ public class People {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return id+","+name+","+fatherid+","+partnerid+","+CourtesyName+","+pesudonym+","+ChineseBirthday+","+Chinesedeathdate+","
-				+buried+","+rank+","+generition+","+description;
+		return id+","+name+","+fatherid+","+motherid+","+partnerid+","+CourtesyName+","+pesudonym+","+gender+","+ChineseBirthday+","+Chinesedeathdate+","
+				+buried+","+familyrank+","+generition+","+family+","+description;
 	}
 	
 	public String toStringTest() {
 		// TODO Auto-generated method stub
-		return id+","+name+","+partnerid+","+CourtesyName+","+pesudonym+","+ChineseBirthday+","+Chinesedeathdate+","
-				+buried+","+rank+","+generition+","+daughterinfo+","+soninfo+","+description;
+		return id+","+name+","+fatherid+","+partnerid+","+CourtesyName+","+pesudonym+","+ChineseBirthday+","+Chinesedeathdate+","
+				+buried+","+familyrank+","+generition+","+fathername+","+daughterinfo+","+soninfo+","+description;
 	}
 }
