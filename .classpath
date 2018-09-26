@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-4.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/poi-scratchpad-4.0.0.jar" sourcepath="E:/code/Java/jar/poi-src-4.0.0-20180907.zip"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-3.0.1.jar"/>
-	<classpathentry kind="lib" path="E:/code/Java/JiapuAttribute/lib/jxl.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
