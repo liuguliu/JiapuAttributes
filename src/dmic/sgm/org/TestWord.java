@@ -29,7 +29,7 @@ public class TestWord {
 		
 		String text="";
 		String filePath = "data";
-		String fileName = "01卷一　　庙荣公121.doc.txt";
+		String fileName = "12.doc";
         String realPath=filePath+"/"+fileName;	//拼接为含名字的路径
         try {
         	if(fileName.endsWith(".doc")) {
@@ -44,7 +44,7 @@ public class TestWord {
         		BufferedReader bufferedreader = new BufferedReader(filereader);
         		String line="";
         		while((line=bufferedreader.readLine())!=null){
-                    text+=line;
+                    text+=line+"\r";
                 }
         		System.out.println(text);
             }
@@ -53,22 +53,30 @@ public class TestWord {
         }
         String[] lines = text.split("\r");
         int num = lines.length;
-//        for(int i=0; i<lines.length; i++) {	//1 循环读取每一行的人物
-//        	//System.out.println(lines[i]);       	
-//        	p[i] = new People();	//新建人物
-//        	p[i].id = i+1; 
-//        	p[i].description = lines[i];
+        System.out.println(num);
+        for(int i=0; i<lines.length; i++) {	//1 循环读取每一行的人物
+        	//System.out.println(lines[i]);
+        	p[i] = new People();	//新建人物
+        	p[i].id = i+1; 
+        	p[i].description = lines[i];
 //        	//2 提取配偶信息
-//        	int indexofpei = lines[i].indexOf("配");
+//        	int indexofpei;
+//        	if(lines[i].contains("配")) {
+//        		indexofpei=lines[i].indexOf("配");
+//        	}else if(lines[i].contains("妣")){
+//        		indexofpei=lines[i].indexOf("配");
+//        	}else {
+//        		indexofpei = -1;
+//        	}
 //        	int indexofend;
-//        	if(lines[i].contains("生子")) {
-//        		indexofend = lines[i].indexOf("生子");
+//        	if(lines[i].contains(" 子")) {
+//        		indexofend = lines[i].indexOf(" 子");
 //        	}
-//        	else if(lines[i].contains("。女")) {
-//        		indexofend = lines[i].indexOf("。女")+1;
+//        	else if(lines[i].contains(" 女")) {
+//        		indexofend = lines[i].indexOf(" 女")+1;
 //        	}
-//        	else if(lines[i].contains("。公")) {
-//        		indexofend = lines[i].indexOf("。公")+1;
+//        	else if(lines[i].contains(" 公")) {
+//        		indexofend = lines[i].indexOf(" 公")+1;
 //        	}
 //        	else {
 //        		indexofend = lines[i].length();
@@ -93,225 +101,233 @@ public class TestWord {
 //            		}
 //            	} 
 //        	}     	      	
-//        	       	
-//        	String[] lineAttrs = lines[i].split("。");
-//        	for(int j=0;j<lineAttrs.length;j++) {	//3 将人物属性与配偶信息及子女信息分开
-//        		if(lineAttrs[j].charAt(0)=='妣') {
-//        			continue;
-//        		}
-//        		else if(p[i].spouseinfo.contains(lineAttrs[j])) {
-//        			continue;
-//        		}
-//        		else if(lineAttrs[j].contains("生子")) {	//判断是否为儿子信息
-//        			p[i].soninfo=lineAttrs[j];
-//        			continue;
-//        		}
-//        		else if(WhetherDaughter(lineAttrs[j])) {	//判断是否为女儿信息
-//        			p[i].daughterinfo=lineAttrs[j];
-//        			continue;
-//        		}
-//        		else {
-//        			p[i].personInfo+=lineAttrs[j]+"。";
-//        		}
-//        	}	//for
-//        	//System.out.println(p[i].personInfo);
-//        	//System.out.println(p[i].spouseinfo);
-//        	//System.out.println(p[i].soninfo);
-//        	//System.out.println(p[i].daughterinfo);
-//        	//System.out.println("完");
-//        	//4 提取人物属性
-//        	getName(i, p[i].personInfo);
-//        	getFatherNameAndRank(i, p[i].personInfo);
-//        	getCourtesyName(i, p[i].personInfo);
-//        	getpesudonym(i, p[i].personInfo);
-//        	getBirthday(i, p[i].personInfo);
-//        	getDeathdate(i, p[i].personInfo);
-//        	getburied(i, p[i].personInfo);
-//        	getRank(i);
-//        	//System.out.println(p[i].toStringTest());
-//        	//5 处理配偶信息
-//        	if(p[i].spouseinfo!="") {
-//        		if(p[i].spouseinfo.contains("继配")) {
-//        			String wife2 = p[i].spouseinfo.substring(p[i].spouseinfo.indexOf("继配")+2);
-//            		String wife1 = p[i].spouseinfo.substring(1, p[i].spouseinfo.indexOf("继配"));
-//            		getWifeINfo(i, num, wife1, "");
-//            		num++;           		
-//            		if(p[i].spouseinfo.contains("三配")) {
-//            			 String wife3 = wife2.substring(wife2.indexOf("三配")+2);
-//            			 wife2 = wife2.substring(0,wife2.indexOf("三配"));
-//            			 getWifeINfo(i, num, wife2, "继配");
-//                 		 num++;
-//                 		 getWifeINfo(i, num, wife3, "三配");
-//                		 num++;
-//            		}else {
-//            			 getWifeINfo(i, num, wife2, "继配");
-//                		 num++;
-//            		}
-//            	}else {
-//            		getWifeINfo(i, num, p[i].spouseinfo.substring(1), "");
-//            		num++;
-//            	}
-//        	}
-//        	getFatheridAndMotherid(i);
-//        }	//for
-//        for(int i=0; i<lines.length; i++) {	//1 循环读取每一行的人物
-//        	//6 处理儿子信息
-//        	if(p[i].soninfo!="") {
-//        		//System.out.println(p[i].soninfo);
-//        		String[] sons = p[i].soninfo.split(" ");
-//        		for(int j =1; j<sons.length;j++) {
-//        			String nameson="";
-//        			String description = "";
-//        			//提取姓名和描述
-//        			if(sons[j].contains("(")) {
-//        				nameson=sons[j].substring(0, sons[j].indexOf("("));
-//        				description = sons[j].substring(sons[j].indexOf("(")+1,sons[j].length()-1);
-//        				//System.out.print(nameson+" ");
-//        			}else{
-//        				nameson = sons[j];
-//        				//System.out.print(nameson+" ");
-//        			}
-//        			//判断是否存在
-//        			boolean flag=false;
-//        			for(int k=0;k<lines.length;k++) {
-//        				if((p[k].name.equals(nameson)||p[k].name.equals(generationRank[p[i].generition]+nameson))
-//        						&&p[k].fathername.equals(p[i].name)) {
-//        					flag=true;
-//        					break;
-//        				}
-//        			}
-//        			if(!flag) {	//若不存在
-//        				p[num] = new People();
-//        				p[num].id = num+1;
-//        				if(nameson.length()==1) {
-//        					p[num].name = generationRank[p[i].generition]+nameson;
-//        				}else {
-//        					p[num].name = nameson;
-//        				}
-//        				p[num].generition=p[i].generition+1;
-//        				p[num].familyrank = j;
-//        				p[num].fatherid = p[i].id;
-//        				
-//        				int motherid = 0;
-//        				if(p[i].partnerid.contains("/")) {
-//        					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
-//        				}else {
-//        					motherid=Integer.parseInt(p[i].partnerid);
-//        				}
-//        				p[num].motherid = motherid;
-//        				p[num].description = description;
-//        				//System.out.println(p[num].toString());
-//        				num++;
-//        			}else {
-//						continue;
-//					}
-//        		}
-//        		//System.out.println();
-//        	}
-//        }
+        	
+        	String[] lineAttrs = lines[i].split("。");
+        	for(int j=0;j<lineAttrs.length;j++) {	//3 将人物属性与配偶信息及子女信息分开
+        		if(lineAttrs[j].charAt(0)=='妣') {
+        			continue;
+        		}
+        		else if(p[i].spouseinfo.contains(lineAttrs[j])) {
+        			continue;
+        		}
+        		else if(lineAttrs[j].contains("生子")) {	//判断是否为儿子信息
+        			p[i].soninfo=lineAttrs[j];
+        			continue;
+        		}
+        		else if(WhetherDaughter(lineAttrs[j])) {	//判断是否为女儿信息
+        			p[i].daughterinfo=lineAttrs[j];
+        			continue;
+        		}
+        		else {
+        			p[i].personInfo+=lineAttrs[j]+"。";
+        		}
+        	}	//for
+        	//System.out.println(p[i].personInfo);
+        	//System.out.println(p[i].spouseinfo);
+        	//System.out.println(p[i].soninfo);
+        	//System.out.println(p[i].daughterinfo);
+        	//System.out.println("完");
+        	//4 提取人物属性
+        	getName(i, p[i].personInfo);
+        	getFatherNameAndRank(i, p[i].personInfo);
+        	getCourtesyName(i, p[i].personInfo);
+        	getpesudonym(i, p[i].personInfo);
+        	getBirthday(i, p[i].personInfo);
+        	getDeathdate(i, p[i].personInfo);
+        	getburied(i, p[i].personInfo);
+        	getRank(i);
+        	//System.out.println(p[i].toStringTest());
+        	//5 处理配偶信息
+        	if(p[i].spouseinfo!="") {
+        		if(p[i].spouseinfo.contains("继配")) {
+        			String wife2 = p[i].spouseinfo.substring(p[i].spouseinfo.indexOf("继配")+2);
+            		String wife1 = p[i].spouseinfo.substring(1, p[i].spouseinfo.indexOf("继配"));
+            		getWifeINfo(i, num, wife1, "");
+            		num++;           		
+            		if(p[i].spouseinfo.contains("三配")) {
+            			 String wife3 = wife2.substring(wife2.indexOf("三配")+2);
+            			 wife2 = wife2.substring(0,wife2.indexOf("三配"));
+            			 getWifeINfo(i, num, wife2, "继配");
+                 		 num++;
+                 		 getWifeINfo(i, num, wife3, "三配");
+                		 num++;
+            		}else {
+            			 getWifeINfo(i, num, wife2, "继配");
+                		 num++;
+            		}
+            	}else {
+            		getWifeINfo(i, num, p[i].spouseinfo.substring(1), "");
+            		num++;
+            	}
+        	}
+        	getFatheridAndMotherid(i);
+        }	//for
+        for(int i=0; i<lines.length; i++) {	//1 循环读取每一行的人物
+        	//6 处理儿子信息
+        	if(p[i].soninfo!="") {
+        		//System.out.println(p[i].soninfo);
+        		String[] sons = p[i].soninfo.split(" ");
+        		for(int j =1; j<sons.length;j++) {
+        			String nameson="";
+        			String description = "";
+        			//提取姓名和描述
+        			if(sons[j].contains("(")) {
+        				nameson=sons[j].substring(0, sons[j].indexOf("("));
+        				description = sons[j].substring(sons[j].indexOf("(")+1,sons[j].length()-1);
+        				//System.out.print(nameson+" ");
+        			}else{
+        				nameson = sons[j];
+        				//System.out.print(nameson+" ");
+        			}
+        			//判断是否存在
+        			boolean flag=false;
+        			for(int k=0;k<lines.length;k++) {
+        				if((p[k].name.equals(nameson)||p[k].name.equals(generationRank[p[i].generition]+nameson))
+        						&&p[k].fathername.equals(p[i].name)) {
+        					flag=true;
+        					break;
+        				}
+        			}
+        			if(!flag) {	//若不存在
+        				p[num] = new People();
+        				p[num].id = num+1;
+        				if(nameson.length()==1) {
+        					p[num].name = generationRank[p[i].generition]+nameson;
+        				}else {
+        					p[num].name = nameson;
+        				}
+        				p[num].generition=p[i].generition+1;
+        				p[num].familyrank = j;
+        				p[num].fatherid = p[i].id;
+        				
+        				int motherid = 0;
+        				if(p[i].partnerid!="") {
+        					if(p[i].partnerid.contains("/")) {
+            					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
+            				}else {
+            					motherid=Integer.parseInt(p[i].partnerid);
+            				}
+            				p[num].motherid = motherid;
+        				}     				
+        				p[num].description = description;
+        				//System.out.println(p[num].toString());
+        				num++;
+        			}else {
+						continue;
+					}
+        		}
+        		//System.out.println();
+        	}
+        }
+        for(int i=0;i<num;i++) {
+        	if(p[i].gender.equals("男")) {
+        		p[i].name = "吴" + p[i].name;
+        	}
+        }
+        for(int i=0;i<num;i++) {    	
+        	//7 处理女儿信息
+        	if(p[i].daughterinfo!="") {
+        		System.out.println(p[i].daughterinfo);
+        		int daughternum = getDaughterNum(p[i].daughterinfo);
+        		if(!p[i].daughterinfo.contains(" ")) {   //俱夭     			        			
+    				for(int j=0;j<daughternum;j++) {
+    					p[num] = new People();
+    					p[num].id = num+1;
+    					p[num].name = "女"+cNum[j];
+    					p[num].gender="女";
+    					p[num].familyrank=j+1;
+    					p[num].generition=p[i].generition+1;
+    					p[num].fatherid = p[i].id;
+        				
+        				int motherid = 0;
+        				if(p[i].partnerid!="") {
+        					if(p[i].partnerid.contains("/")) {
+            					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
+            				}else {
+            					motherid=Integer.parseInt(p[i].partnerid);
+            				}
+        				}
+        				p[num].motherid = motherid;
+        				if(p[i].daughterinfo.contains(")")){
+        					p[num].description = "夭";
+        				}
+        				//System.out.println(p[num].toString());
+        				num++;
+    				}
+        		}else {
+        			String[] daughters = p[i].daughterinfo.split(" ");
+        			for(int j=1;j<daughternum;j++) {
+        				if(daughters[j].contains(rankNum[j]+"适")||daughters[j].charAt(0)=='适') {
+        					p[num]=new People();
+        					p[num].id=num+1;
+        					p[num].name="女"+cNum[j-1];
+        					p[num].gender="女";
+        					p[num].familyrank=j;
+        					p[num].generition=p[i].generition+1;
+        					p[num].fatherid = p[i].id;
+            				
+            				int motherid = 0;
+            				if(p[i].partnerid!="") {
+            					if(p[i].partnerid.contains("/")) {
+                					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
+                				}else {
+                					motherid=Integer.parseInt(p[i].partnerid);
+                				}
+                				p[num].motherid = motherid;
+            				}            				
+            				if(daughters[j].contains(rankNum[j]+"适")) {
+            					p[num].description = daughters[j].substring(1);
+            				}else {
+            					p[num].description = daughters[j];
+            				}
+            				p[num].partnerid = String.valueOf(num+2);
+            				//System.out.println(p[num].toString());
+            				num++;
+            				//嫁
+            				p[num]=new People();
+        					p[num].id=num+1;
+        					if(daughters[j].contains(rankNum[j]+"适")) {
+        						p[num].name=daughters[j].substring(2);
+            				}else {
+            					p[num].name=daughters[j].substring(1);
+            				}
+        					p[num].partnerid = String.valueOf(num);
+        					num++;
+        				}else  {
+        					p[num]=new People();
+        					p[num].id=num+1;
+        					p[num].name="女"+cNum[j-1];
+        					p[num].gender="女";
+        					p[num].familyrank=j;
+        					p[num].generition=p[i].generition+1;
+        					p[num].fatherid = p[i].id;
+            				
+            				int motherid = 0;
+            				if(p[i].partnerid!="") {
+            					if(p[i].partnerid.contains("/")) {
+                					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
+                				}else {
+                					motherid=Integer.parseInt(p[i].partnerid);
+                				}
+                				p[num].motherid = motherid;
+            				}
+            				if(daughters[j].contains("(殀)")||daughters[j].contains("(夭)")) {
+            					p[num].description = "夭";
+            				}
+            				//System.out.println(p[num].toString());
+            				num++;
+        				}
+        			}
+        		}
+        	}//7 处理女儿信息
+        }
+        String path = "data/第15卷.xls";
+        List<People> list = new ArrayList<People>();
 //        for(int i=0;i<num;i++) {
-//        	if(p[i].gender.equals("男")) {
-//        		p[i].name = "吴" + p[i].name;
-//        	}
+//        	list.add(p[i]);
+//        	System.out.println(p[i].toString());
 //        }
-//        for(int i=0;i<num;i++) {    	
-//        	//7 处理女儿信息
-//        	if(p[i].daughterinfo!="") {
-//        		//System.out.println(p[i].daughterinfo);
-//        		int daughternum = getDaughterNum(p[i].daughterinfo);
-//        		if(!p[i].daughterinfo.contains(" ")) {        			        			
-//    				for(int j=0;j<daughternum;j++) {
-//    					p[num] = new People();
-//    					p[num].id = num+1;
-//    					p[num].name = "女"+cNum[j];
-//    					p[num].gender="女";
-//    					p[num].familyrank=j+1;
-//    					p[num].generition=p[i].generition+1;
-//    					p[num].fatherid = p[i].id;
-//        				
-//        				int motherid = 0;
-//        				if(p[i].partnerid.contains("/")) {
-//        					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
-//        				}else {
-//        					motherid=Integer.parseInt(p[i].partnerid);
-//        				}
-//        				p[num].motherid = motherid;
-//        				if(p[i].daughterinfo.contains(")")){
-//        					p[num].description = "夭";
-//        				}
-//        				//System.out.println(p[num].toString());
-//        				num++;
-//    				}
-//        		}else {
-//        			String[] daughters = p[i].daughterinfo.split(" ");
-//        			for(int j=1;j<daughternum;j++) {
-//        				if(daughters[j].contains(rankNum[j]+"适")||daughters[j].charAt(0)=='适') {
-//        					p[num]=new People();
-//        					p[num].id=num+1;
-//        					p[num].name="女"+cNum[j-1];
-//        					p[num].gender="女";
-//        					p[num].familyrank=j;
-//        					p[num].generition=p[i].generition+1;
-//        					p[num].fatherid = p[i].id;
-//            				
-//            				int motherid = 0;
-//            				if(p[i].partnerid.contains("/")) {
-//            					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
-//            				}else {
-//            					motherid=Integer.parseInt(p[i].partnerid);
-//            				}
-//            				p[num].motherid = motherid;
-//            				if(daughters[j].contains(rankNum[j]+"适")) {
-//            					p[num].description = daughters[j].substring(1);
-//            				}else {
-//            					p[num].description = daughters[j];
-//            				}
-//            				p[num].partnerid = String.valueOf(num+2);
-//            				//System.out.println(p[num].toString());
-//            				num++;
-//            				//嫁
-//            				p[num]=new People();
-//        					p[num].id=num+1;
-//        					if(daughters[j].contains(rankNum[j]+"适")) {
-//        						p[num].name=daughters[j].substring(2);
-//            				}else {
-//            					p[num].name=daughters[j].substring(1);
-//            				}
-//        					p[num].partnerid = String.valueOf(num);
-//        					num++;
-//        				}else  {
-//        					p[num]=new People();
-//        					p[num].id=num+1;
-//        					p[num].name="女"+cNum[j-1];
-//        					p[num].gender="女";
-//        					p[num].familyrank=j;
-//        					p[num].generition=p[i].generition+1;
-//        					p[num].fatherid = p[i].id;
-//            				
-//            				int motherid = 0;
-//            				if(p[i].partnerid.contains("/")) {
-//            					motherid=Integer.parseInt(p[i].partnerid.split("/")[0]);
-//            				}else {
-//            					motherid=Integer.parseInt(p[i].partnerid);
-//            				}
-//            				p[num].motherid = motherid;
-//            				if(daughters[j].contains("(殀)")||daughters[j].contains("(夭)")) {
-//            					p[num].description = "夭";
-//            				}
-//            				//System.out.println(p[num].toString());
-//            				num++;
-//        				}
-//        			}
-//        		}
-//        	}//7 处理女儿信息
-//        }
-//        String path = "data/第15卷.xls";
-//        List<People> list = new ArrayList<People>();
-////        for(int i=0;i<num;i++) {
-////        	list.add(p[i]);
-////        	System.out.println(p[i].toString());
-////        }
-//        //addExcel(path,list);
+        //addExcel(path,list);
 	}
 	
 	
