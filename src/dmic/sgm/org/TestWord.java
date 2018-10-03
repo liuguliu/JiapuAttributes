@@ -229,7 +229,7 @@ public class TestWord {
         	if(p[i].daughterinfo!="") {
         		System.out.println(p[i].daughterinfo);
         		int daughternum = getDaughterNum(p[i].daughterinfo);
-        		if(!p[i].daughterinfo.contains(" ")) {   //俱夭     			        			
+        		if(!p[i].daughterinfo.contains(" ")) {      			        			
     				for(int j=0;j<daughternum;j++) {
     					p[num] = new People();
     					p[num].id = num+1;
@@ -321,8 +321,8 @@ public class TestWord {
         		}
         	}//7 处理女儿信息
         }
-        String path = "data/第15卷.xls";
-        List<People> list = new ArrayList<People>();
+//        String path = "data/第15卷.xls";
+//        List<People> list = new ArrayList<People>();
 //        for(int i=0;i<num;i++) {
 //        	list.add(p[i]);
 //        	System.out.println(p[i].toString());
